@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  saved     SavedCollege[]
+  createdAt DateTime @default(now())
+}
+
+model College {
+  id            String   @id @default(cuid())
+  name          String
+  state         String
+  city          String
+  fees          Int
+  rating        Float
+  placementRate Int
+  avgPackage    Float
+  description   String
+
+  courses       Course[]
+  reviews       Review[]
+  savedBy       SavedCollege[]
+
+  createdAt DateTime @default(now())
+}
+
+model Course {
+  id        String  @id @default(cuid())
+  name      String
+  duration  String
+
+  collegeId String
+  college   College @relation(fields: [collegeId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String  @id @default(cuid())
+  rating    Int
+  comment   String
+
+  collegeId String
+  college   College @relation(fields: [collegeId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model SavedCollege {
+  id        String  @id @default(cuid())
+
+  userId    String
+  collegeId String
+
+  user      User    @relation(fields: [userId], references: [id])
+  college   College @relation(fields: [collegeId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, collegeId])
+}

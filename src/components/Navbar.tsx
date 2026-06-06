@@ -44,16 +44,18 @@ export default async function Navbar() {
                 Saved
               </Link>
 
-              <form
-                action="/api/auth/logout"
-                method="POST"
+              <button
+                onClick={() => {
+                  fetch("/api/auth/logout", {
+                    method: "POST",
+                  }).then(() => {
+                    window.location.href = "/";
+                  });
+                }}
+                className="text-red-600 hover:text-red-700"
               >
-                <button
-                  className="text-red-600 hover:text-red-700"
-                >
-                  Logout
-                </button>
-              </form>
+                Logout
+              </button>
             </>
           ) : (
             <>

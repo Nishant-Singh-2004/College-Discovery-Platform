@@ -7,7 +7,7 @@ async function getColleges(
   minRating = ""
 ) {
   const res = await fetch(
-  `http://localhost:3000/api/colleges?search=${search}&state=${state}&course=${course}&minRating=${minRating}`,
+  `${process.env.NEXT_PUBLIC_APP_URL}/api/colleges?search=${search}&state=${state}&course=${course}&minRating=${minRating}`,
   {
     cache: "no-store",
   }

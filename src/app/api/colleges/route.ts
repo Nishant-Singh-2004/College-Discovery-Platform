@@ -5,6 +5,10 @@ export async function GET(request: Request) {
 
   const search = searchParams.get("search") || "";
   const state = searchParams.get("state") || "";
+  const course = searchParams.get("course") || "";
+  const minRating = Number(
+    searchParams.get("minRating") || "0"
+  );
 
   const colleges = await prisma.college.findMany({
     where: {
@@ -17,14 +21,41 @@ export async function GET(request: Request) {
               },
             }
           : {},
+
         state
           ? {
               state,
             }
           : {},
+
+        minRating > 0
+          ? {
+              rating: {
+                gte: minRating,
+              },
+            }
+          : {},
+
+        course
+          ? {
+              courses: {
+                some: {
+                  name: {
+                    contains: course,
+                    mode: "insensitive",
+                  },
+                },
+              },
+            }
+          : {},
       ],
     },
-    take: 20,
+
+    include: {
+      courses: true,
+    },
+
+    take: 50,
   });
 
   return Response.json(colleges);

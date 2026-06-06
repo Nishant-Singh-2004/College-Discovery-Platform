@@ -32,12 +32,12 @@ export default async function ComparePage({
   });
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-6">
+    <div className="max-w-7xl mx-auto px-6 py-8">
+      <h1 className="text-4xl font-bold mb-8 text-slate-900">
         Compare Colleges
       </h1>
 
-      <form className="grid md:grid-cols-3 gap-4 mb-8">
+      <form className="grid md:grid-cols-4 gap-4 mb-8">
         {[1, 2, 3].map((num) => (
           <select
             key={num}
@@ -45,7 +45,8 @@ export default async function ComparePage({
             defaultValue={
               params[`c${num}` as keyof typeof params]
             }
-            className="border p-2 rounded"
+            className="bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-900"
+
           >
             <option value="">
               Select College
@@ -63,7 +64,7 @@ export default async function ComparePage({
         ))}
 
         <button
-          className="bg-black text-white p-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-4 py-3"
         >
           Compare
         </button>
@@ -71,17 +72,17 @@ export default async function ComparePage({
 
       {colleges.length > 0 && (
         <div className="overflow-auto">
-          <table className="w-full border">
+          <table className="w-full bg-white rounded-xl overflow-hidden shadow-sm">
             <tbody>
               <tr>
-                <td className="border p-2 font-bold">
+                <td className="bg-slate-100 font-semibold p-4 text-slate-900">
                   Name
                 </td>
 
                 {colleges.map((college) => (
                   <td
                     key={college.id}
-                    className="border p-2"
+                    className="border border-slate-200 p-4 text-slate-700"
                   >
                     {college.name}
                   </td>
@@ -89,14 +90,14 @@ export default async function ComparePage({
               </tr>
 
               <tr>
-                <td className="border p-2 font-bold">
+                <td className="bg-slate-100 font-semibold p-3">
                   Location
                 </td>
 
                 {colleges.map((college) => (
                   <td
                     key={college.id}
-                    className="border p-2"
+                    className="border border-slate-200 p-3"
                   >
                     {college.city}
                   </td>
@@ -104,14 +105,14 @@ export default async function ComparePage({
               </tr>
 
               <tr>
-                <td className="border p-2 font-bold">
+                <td className="bg-slate-100 font-semibold p-3">
                   Fees
                 </td>
 
                 {colleges.map((college) => (
                   <td
                     key={college.id}
-                    className="border p-2"
+                    className="border border-slate-200 p-3"
                   >
                     ₹{college.fees}
                   </td>
@@ -119,14 +120,14 @@ export default async function ComparePage({
               </tr>
 
               <tr>
-                <td className="border p-2 font-bold">
+                <td className="bg-slate-100 font-semibold p-3">
                   Rating
                 </td>
 
                 {colleges.map((college) => (
                   <td
                     key={college.id}
-                    className="border p-2"
+                    className="border border-slate-200 p-3"
                   >
                     {college.rating}
                   </td>
@@ -134,14 +135,14 @@ export default async function ComparePage({
               </tr>
 
               <tr>
-                <td className="border p-2 font-bold">
+                <td className="bg-slate-100 font-semibold p-3">
                   Placement %
                 </td>
 
                 {colleges.map((college) => (
                   <td
                     key={college.id}
-                    className="border p-2"
+                    className="border border-slate-200 p-3"
                   >
                     {college.placementRate}
                   </td>
@@ -149,14 +150,14 @@ export default async function ComparePage({
               </tr>
 
               <tr>
-                <td className="border p-2 font-bold">
+                <td className="bg-slate-100 font-semibold p-3">
                   Avg Package
                 </td>
 
                 {colleges.map((college) => (
                   <td
                     key={college.id}
-                    className="border p-2"
+                    className="border border-slate-200 p-3"
                   >
                     ₹{college.avgPackage} LPA
                   </td>
